@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('plannings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('patient_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('type');
             $table->dateTime('debut');
             $table->dateTime('fin');
+            $table->string('etat');
             $table->timestamps();
         });
     }

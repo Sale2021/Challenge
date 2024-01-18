@@ -1,43 +1,46 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white'])
+@props(['title' => '', 'link','url'])
 
-@php
-switch ($align) {
-    case 'left':
-        $alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-        break;
-}
 
-switch ($width) {
-    case '48':
-        $width = 'w-48';
-        break;
-}
-@endphp
-
-<div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
-        {{ $trigger }}
-    </div>
-
-    <div x-show="open"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
-            style="display: none;"
-            @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
-            {{ $content }}
+<li {{ $attributes->merge(['class' => 'nav-item dropdown']) }} >
+    <a {{ $attributes->merge(['class' => 'nav-link dropdown-toggle']) }} href="#{{ $title }}"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="false"
+        role="button" aria-expanded="false"
+        >
+        <span {{ $attributes->merge(['class' => 'nav-link-icon d-md-none d-lg-inline-block']) }} >
+            {{ $slot }}
+        </span>
+        <span {{ $attributes->merge(['class' => 'nav-link-title']) }} >{{ $title }}</span>
+    </a>
+    <div {{ $attributes->merge(['class' => 'dropdown-menu']) }}>
+        <div {{ $attributes->merge(['class' => 'dropdown-menu-columns']) }}>
+            <div {{ $attributes->merge(['class' => 'dropdown-menu-column']) }}>
+                {{ $link }}
+            </div>
         </div>
     </div>
-</div>
+</li>
+
+
+{{-- @props(['title' => '', 'link', 'url'])
+
+<div x-data="{ open: false }" @click.away="open = false" class="nav-item dropdown">
+    <!-- Dropdown toggle link -->
+    <a x-on:click="open = !open" class="nav-link dropdown-toggle" href="#{{ $title }}" role="button"
+        aria-expanded="false">
+        <!-- Icon for the dropdown -->
+        <span class="nav-link-icon d-md-none d-lg-inline-block">{{ $slot }}</span>
+        <!-- Title for the dropdown -->
+        <span class="nav-link-title">{{ $title }}</span>
+    </a>
+
+    <!-- Dropdown menu -->
+    <div x-show.important="open" class="dropdown-menu">
+        <div class="dropdown-menu-columns">
+            <div class="dropdown-menu-column">
+                <!-- Links for the dropdown -->
+                {{ $link }}
+            </div>
+        </div>
+    </div>
+</div> --}}

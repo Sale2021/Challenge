@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\DeleteAction;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    use DeleteAction;
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        Patient::create($request->validated());
+        toastr()->success('Patient ajouter avec success!');
+
+        return back();
     }
 
     /**
@@ -44,7 +34,7 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('patient.update', compact('patient'));
     }
 
     /**
@@ -52,7 +42,10 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+        $patient->update($request->validated());
+        toastr()->success('Patient mise à jour avec success!');
+
+        return back();
     }
 
     /**
@@ -60,6 +53,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $delete = Patient::findOrFail($patient);
+
+        return $this->supp($delete);
     }
 }

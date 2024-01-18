@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\DeleteAction;
+use App\Http\Requests\StoreDocteurRequest;
 use App\Models\Docteur;
-use Illuminate\Http\Request;
 
 class DocteurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    use DeleteAction;
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDocteurRequest $request)
     {
-        //
+        Docteur::create($request->validated());
+        toastr()->success('Docteur ajouter avec success!');
+
+        return back();
     }
 
     /**
@@ -44,15 +34,18 @@ class DocteurController extends Controller
      */
     public function edit(Docteur $docteur)
     {
-        //
+        return view('docteur.update', compact('docteur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Docteur $docteur)
+    public function update(StoreDocteurRequest $request, Docteur $docteur)
     {
-        //
+        $docteur->update($request->validated());
+        toastr()->success('docteur mise à jour avec success!');
+
+        return back();
     }
 
     /**
@@ -60,6 +53,8 @@ class DocteurController extends Controller
      */
     public function destroy(Docteur $docteur)
     {
-        //
+        $delete = Docteur::findOrFail($docteur);
+
+        return $this->supp($delete);
     }
 }

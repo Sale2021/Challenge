@@ -17,7 +17,13 @@ class StructureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nom' => $this->faker->company(),
+            'type' => $this->faker->randomElement(['pharmacie', 'laboratoire', 'clinique']),
+            'contact' => $this->faker->phoneNumber(),
+            'quartier_id' => random_int(1, 5),
+            'map' => $this->faker->latitude(12).','.$this->faker->longitude(-8),
+            'horaire' => $this->faker->sentence(),
+            'assurance' => $this->faker->sentence(1),
         ];
     }
 }

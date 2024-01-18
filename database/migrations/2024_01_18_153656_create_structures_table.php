@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('map');
             $table->string('horaire');
             $table->string('assurance');
-            $table->string('code');
             $table->timestamps();
         });
     }

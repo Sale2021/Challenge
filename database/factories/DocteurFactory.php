@@ -17,7 +17,11 @@ class DocteurFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'departement_id' => \rand(1, 5),
+            'prenom' => $this->faker->firstName(),
+            'nom' => $this->faker->lastName(),
+            'contact' => $this->faker->phoneNumber(),
+            'specialite' => $this->faker->randomElement(['Rhumatologie', 'Endocrinologie', 'Urologie', 'Radiologie', 'Psychiatrie', 'Ophtalmologie', 'Gynécologie et obstétrique', 'Pédiatrie', 'Neurologie']),
         ];
     }
 }
