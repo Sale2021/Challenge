@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePlanningRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StorePlanningRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,23 @@ class StorePlanningRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'debut' => 'string|required',
+            'fin' => 'string|required',
+            'type' => 'string|required',
+            'user_id' => 'required|exists:users,id',
+            'patient_id' => 'required|exists:patients,id',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => Auth::user()->id,
+        ]);
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        return toastr()->error('la validation a echoué verifiez vos informations!');
     }
 }

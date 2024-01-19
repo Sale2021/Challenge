@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helper\DeleteAction;
+use App\Http\Requests\StorePatientRequest;
 use App\Models\Patient;
-use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
@@ -13,9 +13,10 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePatientRequest $request)
     {
-        Patient::create($request->validated());
+        $item = Patient::create($request->validated());
+        $item->generateId('P');
         toastr()->success('Patient ajouter avec success!');
 
         return back();
@@ -40,7 +41,7 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Patient $patient)
+    public function update(StorePatientRequest $request, Patient $patient)
     {
         $patient->update($request->validated());
         toastr()->success('Patient mise à jour avec success!');

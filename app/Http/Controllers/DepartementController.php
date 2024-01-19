@@ -15,7 +15,8 @@ class DepartementController extends Controller
      */
     public function store(Request $request)
     {
-        Departement::create($request->validated());
+        $request->validate(['nom' => 'required']);
+        Departement::create(['nom' => $request->nom]);
         toastr()->success('Departement ajouter avec success!');
 
         return back();
@@ -42,7 +43,8 @@ class DepartementController extends Controller
      */
     public function update(Request $request, Departement $departement)
     {
-        $departement->update($request->validated());
+        $request->validate(['nom' => 'required']);
+        $departement->update($request->nom);
         toastr()->success('Departement mise à jour avec success!');
 
         return back();

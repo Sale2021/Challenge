@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helper\DateFormat;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Departement extends Model
 {
-    use HasFactory;
+    use DateFormat;
 
     /**
      * The attributes that are mass assignable.
@@ -23,5 +23,13 @@ class Departement extends Model
     public function docteurs(): HasMany
     {
         return $this->hasMany(Docteur::class);
+    }
+
+    /**
+     * Get all of the users for the Departement
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }

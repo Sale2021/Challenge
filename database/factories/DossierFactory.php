@@ -17,7 +17,14 @@ class DossierFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'patient_id' => \rand(1, 15),
+            'poids' => \rand(20, 90),
+            'tension' => \rand(20, 90),
+            'frequence' => \rand(20, 90),
+            'temperature' => \rand(20, 90),
+            'taille' => $this->faker->randomFloat(2, 1),
+            'tuteur' => $this->faker->phoneNumber(),
+            'allergie' => $this->faker->sentence(),
         ];
     }
 }

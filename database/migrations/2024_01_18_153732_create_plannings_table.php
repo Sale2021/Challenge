@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\PlanningEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->dateTime('debut');
             $table->dateTime('fin');
-            $table->string('etat');
+            $table->string('etat')->default(PlanningEnum::EN_ATTENTE->value);
             $table->timestamps();
         });
     }

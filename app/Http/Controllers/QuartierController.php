@@ -2,33 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\DeleteAction;
 use App\Models\Quartier;
 use Illuminate\Http\Request;
 
 class QuartierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    use DeleteAction;
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['nom' => ['required']]);
+        Quartier::create(['nom' => $request->nom]);
+        toastr()->success('quartier ajouter avec success!');
+
+        return back();
     }
 
     /**
@@ -44,7 +35,7 @@ class QuartierController extends Controller
      */
     public function edit(Quartier $quartier)
     {
-        //
+        return view('quartier.update', compact('quartier'));
     }
 
     /**
@@ -52,7 +43,11 @@ class QuartierController extends Controller
      */
     public function update(Request $request, Quartier $quartier)
     {
-        //
+        $request->validate(['nom' => ['required']]);
+        $quartier->update($request->nom);
+        toastr()->success('quartier mise à jour avec success!');
+
+        return back();
     }
 
     /**
@@ -60,6 +55,8 @@ class QuartierController extends Controller
      */
     public function destroy(Quartier $quartier)
     {
-        //
+        $delete = quartier::findOrFail($quartier);
+
+        return $this->supp($delete);
     }
 }

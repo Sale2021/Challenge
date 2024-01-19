@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('patient_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('poids');
+            $table->string('taille');
+            $table->string('tension');
+            $table->string('frequence');
+            $table->string('temperature');
+            $table->string('tuteur');
+            $table->string('allergie');
+            $table->longText('observation')->nullable();
             $table->timestamps();
         });
     }

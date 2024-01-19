@@ -1,1 +1,1 @@
-<img src="{{ asset('/img/logo/logo_black.png') }}" style="height: 8rem;" alt="logo" class="navbar-brand-image">
+<h2 class="navbar-brand">KénéyaYiri</h2>

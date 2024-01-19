@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sexe');
             $table->date('naissance');
             $table->string('adresse');
+            $table->string('sang');
             $table->string('email')->nullable();
             $table->string('reference')->nullable()->unique();
             $table->timestamps();

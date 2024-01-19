@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helper\DateFormat;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Docteur extends Model
 {
-    use HasFactory;
+    use DateFormat;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['prenom', 'specialite', 'contact'];
+    protected $fillable = ['prenom', 'nom', 'specialite', 'contact'];
 
     /**
      * Get the departement that owns the Docteur

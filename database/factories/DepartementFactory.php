@@ -17,7 +17,7 @@ class DepartementFactory extends Factory
     public function definition(): array
     {
         return [
-            'nom' => $this->faker->company,
+            'nom' => $this->faker->randomElement(['Urgences', 'Chirurgie', 'Pédiatrie', 'Gynécologie et Obstétrique', 'Anesthésiologie', 'Psychiatrie', 'Cardiologie', 'Neurologie']),
         ];
     }
 }

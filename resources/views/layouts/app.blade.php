@@ -13,146 +13,101 @@
     <!-- CSS files -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .loader {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #206bc4;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .file,
-        .file-list {
-            position: relative;
-        }
-
-        .file .file-info,
-        .file .file-action,
-        .file-list .file-info,
-        .file-list .file-action {
-            position: absolute;
-            display: none;
-        }
-
-        .file .file-info,
-        .file-list .file-info {
-            bottom: 0.5rem;
-            left: 0;
-            right: 0;
-            display: inline;
-        }
-
-        .file .file-action,
-        .file-list .file-action {
-            top: 0.5rem;
-            right: 0.5rem;
-        }
-
-        .file:hover,
-        .file-list:hover {
-            cursor: pointer;
-        }
-
-        .file:hover .file-action,
-        .file-list:hover .file-action {
-            display: inline;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    @vite(['resources/css/app.css'])
 
 </head>
 
-<body class=" layout-fluid">
-    <div class="page">
-        <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
-                    aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('/img/logo/logo_white2.png') }}" style="height: 3rem;" alt="logo"
-                            class="navbar-brand-image">
-                    </a>
-                </h1>
-                <div class="navbar-nav flex-row d-lg-none">
-                    <div class="d-none d-lg-flex">
-                        <x-notification />
-                    </div>
-                    <x-profile />
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid py-2 d-none d-lg-flex">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <small class="me-3"><i class="fa fa-map-marker-alt me-2"></i>Bamako, Mali</small>
+                    <small class="me-3"><i class="fa fa-clock me-2"></i>Lundi-Vendredi, 08h00-17h00</small>
                 </div>
-                @include('layouts.nav')
+
             </div>
-        </aside>
-        <!-- Navbar -->
-        <header class="navbar navbar-expand-md navbar-light d-none d-lg-flex d-print-none">
-            <div class="container-xl">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-                    aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-nav flex-row order-md-last">
-                    <div class="d-none d-md-flex">
-                        <x-notification />
-                    </div>
-                    <x-profile />
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Brand Start -->
+    <div class="container-fluid bg-primary text-white pt-4 pb-5 d-none d-lg-flex">
+        <div class="container pb-2">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex">
+                    <i class="bi bi-telephone-inbound fs-2"></i>
+                    <div class="ms-3">
+                        <h5 class="text-white mb-0">Contact</h5>
+                        <span>77951615</span>
                     </div>
                 </div>
-            </div>
-        </header>
-        <div class="page-wrapper">
-            <div class="page-header d-print-none">
-                <div class="container-fluid">
-                    <div class="row px-3 align-items-center mw-100">
-                        @yield('header')
+                <a href="{{ route('accueil') }}" class="h1 text-white mb-0">Kénéya<span
+                        class="text-dark">Yiri</span></a>
+                <div class="d-flex">
+                    <i class="bi bi-envelope fs-2"></i>
+                    <div class="ms-3">
+                        <h5 class="text-white mb-0">Mail Now</h5>
+                        <span>info@ky.com</span>
                     </div>
-                </div>
-            </div>
-            <div class="page-body ps-3">
-                <div class="container-fluid">
-                    @yield('content')
                 </div>
             </div>
         </div>
-        <footer class="footer footer-transparent d-print-none">
-            <div class="container-xl">
-                <div class="row text-center align-items-center flex-row-reverse">
-                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                        <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">
-                                Copyright &copy; 2023
-                                <a href="." class="link-secondary">Couribox</a>.
-                                All rights reserved.
-                            </li>
-                        </ul>
-                    </div>
+    </div>
+    <!-- Brand End -->
+    @include('layouts.nav')
+    @yield('content')
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright bg-dark text-white-50 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; <a href="#">Kénéya Yiri</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                    <p class="mb-0">Designed by <a href="https://htmlcodex.com">Kénéya Yiri</a></p>
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+            class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

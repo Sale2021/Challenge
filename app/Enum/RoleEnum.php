@@ -9,6 +9,6 @@ enum RoleEnum: string
     // case SUPERADMIN = 'Superadmin';
     case ADMIN = 'Administrateur';
     case TEACHER = 'Medecin';
-    case STUDENT = 'Secretaire';
-    case PARENT = 'Parent';
+    case STUDENT = 'Interne';
+    case PARENT = 'infirmier';
 }

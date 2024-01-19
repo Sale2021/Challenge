@@ -39,7 +39,7 @@ trait DeleteAction
 
     public function supp_auth(Model $delete): JsonResponse
     {
-        $this->authorize('delete', $delete);
+
         $delete->delete();
 
         return response()->json([

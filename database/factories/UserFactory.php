@@ -26,6 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'departement_id' => \rand(1, 5),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'role' => $this->faker->randomElement(RoleEnum::cases()),

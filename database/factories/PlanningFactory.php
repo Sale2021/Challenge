@@ -20,9 +20,9 @@ class PlanningFactory extends Factory
         return [
             'patient_id' => \rand(1, 10),
             'user_id' => \rand(1, 10),
-            'type' => $this->faker->randomElement(['Consultations standard', 'Urgences médicales', 'Examens médicaux', 'Suivi', 'Rééducations et thérapies']),
-            'debut' => $this->faker->dateTimeInInterval('0 years', '-2 days'),
-            'fin' => $this->faker->dateTimeInInterval('0 years', '+2 days'),
+            'type' => $this->faker->randomElement(['Consultations', 'Urgences', 'Examens', 'Suivi', 'Rééducations']),
+            'debut' => $this->faker->dateTimeInInterval('0 years', '1 days'),
+            'fin' => $this->faker->dateTimeInInterval('0 years', '1 days'),
             'etat' => $this->faker->randomElement(PlanningEnum::cases()),
         ];
     }

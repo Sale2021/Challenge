@@ -11,7 +11,7 @@ class StoreStructureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreStructureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => ['required', 'string'],
+            'contact' => ['required'],
+            'horaire' => ['required'],
+            'assurance' => ['required'],
+            'quartier_id' => ['required'],
+            'map' => ['required', 'string'],
         ];
     }
 }

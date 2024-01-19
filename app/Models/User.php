@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enum\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'departement_id',
         'etat',
     ];
 
@@ -44,6 +47,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => RoleEnum::class,
     ];
 
     /**
@@ -52,5 +56,13 @@ class User extends Authenticatable
     public function plannings(): HasMany
     {
         return $this->hasMany(Planning::class);
+    }
+
+    /**
+     * Get the departement that owns the User
+     */
+    public function departement(): BelongsTo
+    {
+        return $this->belongsTo(Departement::class);
     }
 }

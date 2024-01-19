@@ -24,6 +24,7 @@ class PatientFactory extends Factory
             'adresse' => $this->faker->city(),
             'sexe' => $this->faker->randomElement(['Homme', 'Femme']),
             'reference' => \uniqid(),
+            'sang' => $this->faker->randomElement(['AB', 'B+', 'O+', 'O-']),
         ];
     }
 }

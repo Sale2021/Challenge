@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\DeleteAction;
+use App\Http\Requests\StorePlanningRequest;
 use App\Models\Planning;
-use Illuminate\Http\Request;
 
 class PlanningController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    use DeleteAction;
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePlanningRequest $request)
     {
-        //
+        Planning::create($request->validated());
+        toastr()->success('Planning ajouter avec success!');
+
+        return back();
     }
 
     /**
@@ -44,15 +34,18 @@ class PlanningController extends Controller
      */
     public function edit(Planning $planning)
     {
-        //
+        return view('planning.update', compact('planning'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Planning $planning)
+    public function update(StorePlanningRequest $request, Planning $planning)
     {
-        //
+        $planning->update($request->validated());
+        toastr()->success('Planning mise à jour avec success!');
+
+        return back();
     }
 
     /**
@@ -60,6 +53,8 @@ class PlanningController extends Controller
      */
     public function destroy(Planning $planning)
     {
-        //
+        $delete = Planning::findOrFail($planning);
+
+        return $this->supp($delete);
     }
 }

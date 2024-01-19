@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\DeleteAction;
+use App\Http\Requests\StoreDossierRequest;
 use App\Models\Dossier;
-use Illuminate\Http\Request;
 
 class DossierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    use DeleteAction;
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDossierRequest $request)
     {
-        //
+        Dossier::create($request->validated());
+        toastr()->success('dossier ajouter avec success!');
+
+        return back();
     }
 
     /**
@@ -36,7 +26,7 @@ class DossierController extends Controller
      */
     public function show(Dossier $dossier)
     {
-        //
+        return view('dossier.show', compact('dossier'));
     }
 
     /**
@@ -44,15 +34,18 @@ class DossierController extends Controller
      */
     public function edit(Dossier $dossier)
     {
-        //
+        return view('dossier.update', compact('dossier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dossier $dossier)
+    public function update(StoreDossierRequest $request, Dossier $dossier)
     {
-        //
+        $dossier->update($request->validated());
+        toastr()->success('dossier mise à jour avec success!');
+
+        return back();
     }
 
     /**
@@ -60,6 +53,8 @@ class DossierController extends Controller
      */
     public function destroy(Dossier $dossier)
     {
-        //
+        $delete = Dossier::findOrFail($dossier);
+
+        return $this->supp($delete);
     }
 }
